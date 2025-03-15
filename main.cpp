@@ -1,7 +1,10 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <windows.h>
+
+#ifdef _WIN32
+    #include <windows.h>
+#endif
 
 #include "include/document.h"
 #include "include/kit.h"
@@ -10,8 +13,11 @@
 using namespace std;
 
 int main(int argc, char* argv[]) {
-    SetConsoleCP(65001);
-    SetConsoleOutputCP(65001);
+#ifdef _WIN32
+    SetConsoleCP(CP_UTF8);
+    SetConsoleOutputCP(CP_UTF8);
+#endif
+
     if (argc < 3) {
         cerr << "Использование: " << argv[0] << " <document.txt> <kit.txt>" << endl;
         return 1;
