@@ -8,7 +8,7 @@
 bool Document::loadFromFile(const string &filePath) {
     ifstream file(filePath);
     if (!file.is_open()){
-        cerr << "Не удалось открыть файл документа: " << filePath << "\n";
+        cerr << "Не удалось открыть файл документа: " << filePath << endl;
         return false;
     }
     string line;
@@ -18,12 +18,11 @@ bool Document::loadFromFile(const string &filePath) {
         istringstream streamLine(line);
         DocumentLine documentLine;
         if (!(streamLine >> documentLine.position >> documentLine.quantity)) {
-            cerr << "Некорректная строка в документе (пропускаем): " << line << "\n";
+            cerr << "Некорректная строка в документе (пропускаем): " << line << endl;
             continue;
         }
         string token;
         while (getline(streamLine, token, ',')) {
-            //cout << "Каталоги " << token << endl;
             leftTrim(token);
             rightTrim(token);
             documentLine.catalogs.push_back(token);
